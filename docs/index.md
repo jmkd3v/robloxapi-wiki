@@ -12,4 +12,4 @@ RoAPI is a community dedicated to using and making discoveries with the Roblox A
 On this wiki, you'll find a number of articles about the niche and somewhat hidden parts of the Roblox API.
 
 ## Get started
-Want to build something cool? Learn everything you ened to know about the API in the [Tutorial](tutorial/index.md)!
+Want to build something cool? Learn everything you need to know about the API in the [Tutorial](tutorial/index.md)!
