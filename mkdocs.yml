@@ -1,0 +1,59 @@
+site_name: RoAPI Wiki
+site_url: https://staging.robloxapi.wiki
+repo_name: jmkd3v/robloxapi-wiki
+repo_url: https://github.com/jmkd3v/robloxapi-wiki
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    scheme: slate
+    primary: black
+    accent: blue
+  features:
+    - content.code.annotate
+
+extra_css:
+  - assets/theme.css
+
+plugins:
+  - search
+  - literate-nav:
+      nav_file: SUMMARY.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - meta
+  - pymdownx.betterem
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      guess_lang: false
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/N8yUdkSJwA
+      name: RoAPI Discord
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/jmkdev
+      name: jmkdev on Twitter
