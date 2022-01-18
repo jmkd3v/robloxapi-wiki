@@ -2,7 +2,7 @@
 Some endpoints, like the imageUrl provided by `thumbnails.roblox.com/v1/users/avatar-3d?userId=1`, don't provide a full
 CDN URL and only provide raw hashes, like this: `bbdb80c2b573bf222da3e92f5f148330`.
 We need to turn this into a full CDN URL. 
-A CDN URL looks like https://tX.rbxcdn.com/bbdb80c2b573bf222da3e92f5f148330 where X is the CDN number.
+A CDN URL looks like `t[X].rbxcdn.com/bbdb80c2b573bf222da3e92f5f148330` where X is the CDN number.
 The CDN number ranges from 0 to 7, so you might be tempted to send a request to t0, then t1, and keep going until you
 reach the one containing the object. This works, but it's quite wasteful as you send up to 8 requests for one object.
 
@@ -109,7 +109,7 @@ and in each iteration set the variable to itself bitwise XORed against the integ
         format!("https://t{}.rbxcdn.com/{}", t % 8, hash)
     }
     ```
-=== "Lua 5.1"
+=== "Lua 5.3"
     ```lua
     local function getCdnUrl(hash)
         local i = 31
