@@ -1,4 +1,6 @@
 * [Home](index.md)
 * [Tutorial](tutorial/index.md)
     * [List of Roblox API wrapper libraries](tutorial/library_list.md)
+    * [Finding endpoints](tutorial/finding_endpoints.md)
+    * [Understanding documentation](tutorial/understanding_documentation.md)
 * [CDN hashes](cdn_hashes.md)

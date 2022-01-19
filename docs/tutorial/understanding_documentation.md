@@ -1,0 +1,27 @@
+# Understanding documentation
+Each documentation page contains a list of public endpoints available on that domain and lots of information about how to use them. This article will tell you how to understand this documentation.
+
+## All requests
+![A screenshot of documentation for GET /v1/users/{userId}](/assets/screenshots/v1_users_userid_example.png){ align=right style="height: 250px" }
+
+Documentation for all types of requests will always contain the following:  
+
+- The text in top left corner and the background color differ depending on the method of the request, most often GET or POST.  
+- The Example Value contains an example of what the response from this endpoint might look like - this is useful when you want to build code that requests to an endpoint without sending a request to it yourself to figure out how it responds.
+- The Response Content Type determines what should be passed to the `Accept` header - there’s almost never any reason to change this.  
+- The Parameters change what data is passed to the endpoint when sending the request. The data is passed as a query string or as part of the URL for GET requests and is passed as a JSON body in almost all other requests.  
+- The Response Messages will explain what different HTTP Status Codes mean when returned from the server - if you’re getting an error without enough information, you can check the response messages to see if that status code means something for that endpoint.  
+- The "Try it out!" button will send a request to this endpoint with the data supplied in the Parameters. This will be useful for testing out an endpoint without writing code to send requests.  
+
+## Requests with a body
+
+![A screenshot of documentation for POST /v1/users](/assets/screenshots/v1_users_example.png){ align=right style="height: 300px" }
+
+Requests with a body, like POST, PUT, PATCH, and DELETE, have extra data attached. 
+As you can see, we’ve got a parameter labeled `request`, which just refers to the body of the request, as you can see
+from the "Parameter Type" to the right of it.  
+
+We also are able to change that data’s content type - you’ll almost always want to keep this on `application/json` given
+most endpoints accept JSON. You’ll also see an "Example Value" - this shows you an example of data you can pass as the
+request body. Clicking on that Example Value will immediately set the body to the example data. This is useful for 
+quickly testing an endpoint before implementing it into your program.
