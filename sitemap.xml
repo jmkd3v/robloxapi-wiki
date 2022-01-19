@@ -21,7 +21,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://staging.robloxapi.wiki/tutorial/finding_endpoints/</loc>
+         <lastmod>2022-01-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://staging.robloxapi.wiki/tutorial/library_list/</loc>
+         <lastmod>2022-01-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://staging.robloxapi.wiki/tutorial/understanding_documentation/</loc>
          <lastmod>2022-01-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
