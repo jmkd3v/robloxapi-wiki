@@ -52,7 +52,7 @@ and in each iteration set the variable to itself bitwise XORed against the integ
 === "Elixir"
     ```elixir
     defmodule CDN do
-      @spec get_cdn_url(String.t()) :: integer()
+      @spec get_cdn_url(String.t()) :: String.t()
       def get_cdn_url(hash) do
         t = hash
         |> String.to_charlist
@@ -61,6 +61,93 @@ and in each iteration set the variable to itself bitwise XORed against the integ
         "https://t#{rem(t, 8)}.rbxcdn.com/#{hash}"
       end
     end
+    ```
+=== "64 bit NASM Assembly"
+    ```nasm
+    ; nasm -felf64 cdn_hash.asm -o cdn_hash.o
+    ; gcc -m64 -o cdn_hash cdn_hash.o -no-pie
+    ; ./cdn_hash
+    extern printf, snprintf
+
+    section .text
+        global main
+
+    get_cdn_url:
+        push rdi
+        push rsi
+        push rdx
+        push rcx
+        push r8
+        push rax
+
+        ; rdi is the accumulator
+        mov rdi, 31
+
+        jmp .is_at_end
+
+    .xor_t:
+        push rax
+        ; rax is 8 bytes, get the first byte by AND'ing it by 255
+        mov rax, [rax]
+        and rax, 0xFF
+        xor rdi, rax
+        pop rax
+
+        ; increment hash pointer
+        inc rax
+
+    .is_at_end:
+        cmp byte[rax], 0
+        jne .xor_t
+
+    .fmt_cdn_url:
+        mov rax, rdi
+        xor rdx, rdx
+        mov rsi, 8
+        div rsi
+
+        ; t
+        mov rcx, rdx
+        ; buffer
+        lea rdi, cdn_url
+        ; buffer size
+        mov rsi, 55
+        ; format
+        lea rdx, url_fmt
+        ; hash
+        pop rax
+        mov r8, rax
+        push rax
+        xor rax, rax
+        call snprintf
+
+        pop rax
+        pop r8
+        pop rcx
+        pop rdx
+        pop rsi
+        pop rdi
+
+        ret
+
+    main:
+        lea rax, hash
+        call get_cdn_url
+
+        lea rdi, s_fmt
+        lea rsi, cdn_url
+        xor rax, rax
+        call printf
+
+        mov rax, 60
+        mov rdi, 0
+        syscall
+
+    section .data
+        cdn_url: times 55 db 0
+        s_fmt: db "%s", 10, 0
+        url_fmt: db "https://t%d.rbxcdn.com/%s", 0
+        hash: db "bbdb80c2b573bf222da3e92f5f148330", 0
     ```
 === "JavaScript"
     ```js
