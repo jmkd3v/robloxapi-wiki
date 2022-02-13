@@ -28,6 +28,27 @@ and in each iteration set the variable to itself bitwise XORed against the integ
         
         return f"https://t{t % 8}.rbxcdn.com/{hash}"
     ```
+=== "Golang"
+    ```go
+	package pkg
+
+	import "fmt"
+
+	// GetCdnUrl
+	func GetCdnUrl(hash string) string {
+		if hash == "" {
+			panic("hash is empty")
+		}
+
+		var i int = 31
+
+		for _, char := range hash {
+			i = i ^ int(char)
+		}
+
+		return fmt.Sprintf("https://t%d.rbxcdn.com/%s", i%8, hash)
+	}
+    ```
 === "Elixir"
     ```elixir
     defmodule CDN do
