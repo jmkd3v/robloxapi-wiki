@@ -52,13 +52,12 @@ and in each iteration set the variable to itself bitwise XORed against the integ
 === "Elixir"
     ```elixir
     defmodule CDN do
-      use Bitwise
-      
+      @spec get_cdn_url(String.t()) :: integer()
       def get_cdn_url(hash) do
         t = hash
         |> String.to_charlist
-        |> Enum.reduce(31, fn char, last_code -> bxor(last_code, char) end)
-        
+        |> Enum.reduce(31, fn char, last_code -> Bitwise.bxor(last_code, char) end)
+
         "https://t#{rem(t, 8)}.rbxcdn.com/#{hash}"
       end
     end
