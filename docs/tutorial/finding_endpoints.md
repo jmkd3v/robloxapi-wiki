@@ -1,3 +1,8 @@
+---
+title: Finding endpoints
+description: How to find endpoint URLs
+---
+
 # Finding endpoints
 The first thing you’ll need to know when accessing the API is what endpoint you’ll need to do something. 
 Try to stay away from endpoints on `api.roblox.com` or `www.roblox.com` - they are usually old and there are almost 

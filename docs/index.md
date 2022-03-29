@@ -1,3 +1,8 @@
+---
+title: Home
+description: Documenting the internals of the Roblox API, one article at a time.
+---
+
 # Home
 
 <div align="center">

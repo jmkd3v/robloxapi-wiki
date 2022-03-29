@@ -1,3 +1,8 @@
+---
+title: CDN Hashes
+description: Explains how to get the CDN subdomain ID from the CDN hash.
+---
+
 # CDN hashes
 Some endpoints, like the imageUrl provided by `thumbnails.roblox.com/v1/users/avatar-3d?userId=1`, don't provide a full
 CDN URL and only provide raw hashes, like this: `bbdb80c2b573bf222da3e92f5f148330`.

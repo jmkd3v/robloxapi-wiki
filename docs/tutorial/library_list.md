@@ -1,3 +1,8 @@
+---
+title: Libraries
+description: A list of libraries that can be used to interact with the Roblox API
+---
+
 The Roblox API is powerful, but it's also quite a pain to use without something else helping you. A lot of people who 
 send requests to the Roblox web API end up writing their own crappy wrapper library anyways, so it might be a good idea
 to use one of the many Roblox API wrapper libraries.
