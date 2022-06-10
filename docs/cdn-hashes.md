@@ -54,9 +54,9 @@ We can then use the `x` variable to compose the final URL with the pattern `http
 
 Here are some test cases for this function:
 ```
-func("bbdb80c2b573bf222da3e92f5f148330") == 5
-func("139602eb7c640c43833470e07caada4a") == 7
-func("b717c50234c3d91b0be7dbfc9c588ed4") == 0
+func("bbdb80c2b573bf222da3e92f5f148330") -> 5
+func("139602eb7c640c43833470e07caada4a") -> 7
+func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
 ```
 
 ## Examples
