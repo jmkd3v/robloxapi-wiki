@@ -17,7 +17,7 @@
     width: 100%;
     padding: .5em 1em .5em 1em;
     text-align: center;
-    background: rgb(0, 0, 0, .15);
+    background: var(--md-code-bg-color);
     border-radius: 4px;
     position: relative;
 }
@@ -29,7 +29,7 @@
     font-family: inherit;
     margin: 0px;
     padding: 0;
-    background: var(--md-code-bg-color);
+    background: var(--md-default-bg-color);
     border: none;
     border-radius: 2px;
 }
@@ -40,7 +40,7 @@
 
 #hash-calculator-input {
     color: var(--md-code-hl-keyword-color);
-    background: --md-code-bg-color;
+    background: var(--md-default-bg-color);
     font-size: inherit;
     font-family: inherit;
     width: 32ch;
