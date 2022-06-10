@@ -26,8 +26,6 @@ extra_css:
 
 plugins:
   - search
-  - literate-nav:
-      nav_file: SUMMARY.md
 
 markdown_extensions:
   - admonition
@@ -60,3 +58,12 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/jmkdev
       name: jmkdev on Twitter
+
+nav:
+  - Home: index.md
+  - Tutorial:
+    - tutorial/index.md
+    - Finding endpoints: tutorial/finding-endpoints.md
+    - Understanding documentation: tutorial/understanding-documentation.md
+  - List of Roblox API wrapper libraries: library-list.md
+  - CDN hashes: cdn-hashes.md

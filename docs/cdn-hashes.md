@@ -11,6 +11,34 @@ A CDN URL looks like `t[X].rbxcdn.com/bbdb80c2b573bf222da3e92f5f148330` where X 
 The CDN number ranges from 0 to 7, so you might be tempted to send a request to t0, then t1, and keep going until you
 reach the one containing the object. This works, but it's quite wasteful as you send up to 8 requests for one object.
 
+<div style="font-family: var(--md-code-font-family); color: var(--md-code-hl-string-color); width: 100%; padding: .5em .5em 1em 1em; text-align: center; background: rgb(0, 0, 0, .15); border-radius: .5em;">
+https://<select style="appearance: none; color: var(--md-code-hl-keyword-color); font-size: inherit; font-family: inherit; margin: 0px; padding: 0; background: var(--md-code-bg-color); border: none; ">
+<option value="t">t</option>
+<option value="c">c</option>
+</select><span style="color: var(--md-code-hl-number-color);" id="hash-num">X</span>.rbxcdn.com/<input type="text" autocorrect="off" id="hash-input" maxlength="32" style="color: var(--md-code-hl-keyword-color); background: --md-code-bg-color; font-size: inherit; font-family: inherit; width: calc(32ch + 4px);" placeholder="00000000000000000000000000000000">
+</div>
+
+<script>
+const hashInput = document.getElementById("hash-input")
+const hashNum = document.getElementById("hash-num")
+
+const getCdnUrl = (hash) => {
+    const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)
+
+    return `https://t${t % 8}.rbxcdn.com/${hash}`;
+}
+
+const update = () => {
+    const hash = hashInput.value
+    const hashNumValue = ([...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)) % 8
+    hashNum.textContent = hashNumValue
+}
+
+update();
+
+hashInput.addEventListener("input", update);
+</script>
+
 There's a better way to do this. We can define a variable as 31, loop through the first 32 characters in the string,
 and in each iteration set the variable to itself bitwise XORed against the integer representation of that character 
 (or, alternatively, the integer version of the hex value)

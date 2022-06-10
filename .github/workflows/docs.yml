@@ -2,9 +2,6 @@ name: MkDocs Deploy (dev)
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: "MkDocs Deploy"
   push:
     branches:
       - "main"
@@ -29,8 +26,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install git+https://github.com/squidfunk/mkdocs-material.git@8.0.0b2
-          pip install mkdocs-material mkdocs-literate-nav
+          pip install mkdocs-material
       
       - name: Configure Git user
         run: |

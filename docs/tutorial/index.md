@@ -1,9 +1,14 @@
 ---
-title: Tutorials
+title: Get started
 description: Learn how to use the API in a number of different ways.
 ---
 
-# Tutorial
+# Get started
+
+!!! note
+    This tutorial covers usage of Roblox's "Backend Development V1" APIs. 
+    If you're interested in Roblox's new Open Cloud system, [see Roblox's official Open Cloud tutorial.](https://create.roblox.com/docs/open-cloud/index)
+
 The Roblox API is extremely powerful - it can be used to create anything from group ranking bots to game statistics
 websites.
 
