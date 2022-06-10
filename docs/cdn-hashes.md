@@ -45,9 +45,19 @@ update();
 hashInput.addEventListener("input", update);
 </script>
 
-There's a better way to do this. We can define a variable as 31, loop through the first 32 characters in the string,
-and in each iteration set the variable to itself bitwise XORed against the integer representation of that character 
-(or, alternatively, the integer version of the hex value)
+A common implementation is as follows:  
+Create a function that takes in a string `hash`. In this function, define `x` to `31`.
+Next, we loop through the first 32 characters in `hash`, and in each iteration set the `x` variable to itself bitwise 
+XORed against the integer representation of that character (`x ^= chr`). Then we return `x`.
+
+We can then use the `x` variable to compose the final URL with the pattern `https://t{x}.rbxcdn.com/{hash}`.
+
+Here are some test cases for this function:
+```
+func("bbdb80c2b573bf222da3e92f5f148330") == 5
+func("139602eb7c640c43833470e07caada4a") == 7
+func("b717c50234c3d91b0be7dbfc9c588ed4") == 0
+```
 
 ## Examples
 
