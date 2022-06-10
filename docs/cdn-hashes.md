@@ -11,27 +11,33 @@ A CDN URL looks like `t[X].rbxcdn.com/bbdb80c2b573bf222da3e92f5f148330` where X 
 The CDN number ranges from 0 to 7, so you might be tempted to send a request to t0, then t1, and keep going until you
 reach the one containing the object. This works, but it's quite wasteful as you send up to 8 requests for one object.
 
-<div style="font-family: var(--md-code-font-family); color: var(--md-code-hl-string-color); width: 100%; padding: .5em .5em 1em 1em; text-align: center; background: rgb(0, 0, 0, .15); border-radius: .5em;">
-https://<select style="appearance: none; color: var(--md-code-hl-keyword-color); font-size: inherit; font-family: inherit; margin: 0px; padding: 0; background: var(--md-code-bg-color); border: none; ">
+<div id="hash-calculator-box">
+<button class="md-clipboard md-icon" id="hash-calculator-copy-button" title="Copy to clipboard" data-clipboard-text=""></button>
+<span id="hash-calculator-contents">
+https://<select id="hash-calculator-select">
 <option value="t">t</option>
 <option value="c">c</option>
-</select><span style="color: var(--md-code-hl-number-color);" id="hash-num">X</span>.rbxcdn.com/<input type="text" autocorrect="off" id="hash-input" maxlength="32" style="color: var(--md-code-hl-keyword-color); background: --md-code-bg-color; font-size: inherit; font-family: inherit; width: calc(32ch + 4px);" placeholder="00000000000000000000000000000000">
+</select><span id="hash-calculator-num">X</span>.rbxcdn.com/<input type="text" autocorrect="off" id="hash-calculator-input" maxlength="32" placeholder="00000000000000000000000000000000">
+</span>
 </div>
 
 <script>
-const hashInput = document.getElementById("hash-input")
-const hashNum = document.getElementById("hash-num")
+const hashInput = document.getElementById("hash-calculator-input")
+const hashNum = document.getElementById("hash-calculator-num")
+const hashCdnSelector = document.getElementById("hash-calculator-select")
+const hashCopyButton = document.getElementById("hash-calculator-copy-button")
 
-const getCdnUrl = (hash) => {
+const getCdnUrl = (cdnType, hash) => {
     const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)
 
-    return `https://t${t % 8}.rbxcdn.com/${hash}`;
+    return `https://${cdnType}${t % 8}.rbxcdn.com/${hash}`;
 }
 
 const update = () => {
     const hash = hashInput.value
     const hashNumValue = ([...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)) % 8
     hashNum.textContent = hashNumValue
+    hashCopyButton.setAttribute("data-clipboard-text", getCdnUrl(hashCdnSelector.value, hash))
 }
 
 update();
