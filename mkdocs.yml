@@ -67,3 +67,4 @@ nav:
     - Understanding documentation: tutorial/understanding-documentation.md
   - List of Roblox API wrapper libraries: library-list.md
   - CDN hashes: cdn-hashes.md
+  - Game templates: game-templates.md
