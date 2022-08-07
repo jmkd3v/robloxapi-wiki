@@ -158,11 +158,11 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         ; t
         mov rcx, rdx
         ; buffer
-        lea rdi, cdn_url
+        lea rdi, [cdn_url]
         ; buffer size
         mov rsi, 55
         ; format
-        lea rdx, url_fmt
+        lea rdx, [url_fmt]
         ; hash
         pop rax
         mov r8, rax
@@ -180,11 +180,11 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         ret
 
     main:
-        lea rax, hash
+        lea rax, [hash]
         call get_cdn_url
 
-        lea rdi, s_fmt
-        lea rsi, cdn_url
+        lea rdi, [s_fmt]
+        lea rsi, [cdn_url]
         xor rax, rax
         call printf
 
@@ -197,6 +197,7 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         s_fmt: db "%s", 10, 0
         url_fmt: db "https://t%d.rbxcdn.com/%s", 0
         hash: db "bbdb80c2b573bf222da3e92f5f148330", 0
+
     ```
 === "JavaScript"
     ```js
