@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://staging.robloxapi.wiki/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/cdn-hashes/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/game-templates/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/library-list/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/finding-endpoints/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/understanding-documentation/</loc>
-         <lastmod>2022-10-26</lastmod>
+         <lastmod>2022-10-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
