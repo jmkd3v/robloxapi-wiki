@@ -6,3 +6,6 @@
     font-size: 0.8rem;
 }
 
+.admonition {
+    border: none !important;
+}
