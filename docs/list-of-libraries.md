@@ -1,7 +1,9 @@
 ---
-title: Libraries
+title: List of libraries
 description: A list of libraries that can be used to interact with the Roblox API
 ---
+
+# List of libraries
 
 The Roblox API is powerful, but it can be frustrating to use without any help. Instead of sending requests on your own,
 consider using a Roblox API "wrapper" library. These libraries send requests for you and can help you create apps faster.

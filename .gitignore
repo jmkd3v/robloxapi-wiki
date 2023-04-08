@@ -120,3 +120,4 @@ dmypy.json
 jmkdev_tests/
 
 .gitignore
+.DS_Store

@@ -63,8 +63,8 @@ nav:
   - Home: index.md
   - Tutorial:
     - tutorial/index.md
-    - Finding endpoints: tutorial/finding-endpoints.md
     - Understanding documentation: tutorial/understanding-documentation.md
-  - List of Roblox API wrapper libraries: library-list.md
+  - List of libraries: list-of-libraries.md
   - CDN hashes: cdn-hashes.md
-  - Game templates: game-templates.md
+  - List of game templates: list-of-game-templates.md
+  - List of asset types: list-of-asset-types.md
