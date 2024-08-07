@@ -64,6 +64,10 @@ nav:
   - Tutorial:
     - tutorial/index.md
     - Understanding documentation: tutorial/understanding-documentation.md
+    - Your first request: tutorial/your-first-request.md
+    - Handling errors: tutorial/handling-errors.md
+    - Authentication: tutorial/authentication.md
+    - X-CSRF-TOKEN: tutorial/x-csrf-token.md
   - List of libraries: list-of-libraries.md
   - CDN hashes: cdn-hashes.md
   - List of game templates: list-of-game-templates.md
