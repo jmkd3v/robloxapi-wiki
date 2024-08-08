@@ -28,16 +28,16 @@ const hashCdnSelector = document.getElementById("hash-calculator-select")
 const hashCopyButton = document.getElementById("hash-calculator-copy-button")
 
 const getCdnUrl = (cdnType, hash) => {
-    const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)
+    const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31);
 
     return `https://${cdnType}${t % 8}.rbxcdn.com/${hash}`;
 }
 
 const update = () => {
-    const hash = hashInput.value
-    const hashNumValue = ([...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)) % 8
-    hashNum.textContent = hashNumValue
-    hashCopyButton.setAttribute("data-clipboard-text", getCdnUrl(hashCdnSelector.value, hash))
+    const hash = hashInput.value;
+    const hashNumValue = ([...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)) % 8;
+    hashNum.textContent = hashNumValue;
+    hashCopyButton.setAttribute("data-clipboard-text", getCdnUrl(hashCdnSelector.value, hash));
 }
 
 update();
@@ -64,10 +64,10 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
 === "Python"
     ```py
     def get_cdn_url(hash):
-    i = 31
-    for char in hash[:32]:
-        i ^= ord(char)  # i ^= int(char, 16) also works
-    return f"https://t{i%8}.rbxcdn.com/{hash}"
+        i = 31
+        for char in hash[:32]:
+            i ^= ord(char)  # i ^= int(char, 16) also works
+        return f"https://t{i%8}.rbxcdn.com/{hash}"
 
     # alternatively:
     from functools import reduce
@@ -77,13 +77,12 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         
         return f"https://t{t % 8}.rbxcdn.com/{hash}"
     ```
-=== "Golang"
+=== "Go"
     ```go
 	package pkg
 
 	import "fmt"
 
-	// GetCdnUrl
 	func GetCdnUrl(hash string) string {
 		if hash == "" {
 			panic("hash is empty")
@@ -103,19 +102,24 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
     defmodule CDN do
       @spec get_cdn_url(String.t()) :: String.t()
       def get_cdn_url(hash) do
-        t = hash
-        |> String.to_charlist
-        |> Enum.reduce(31, fn char, last_code -> Bitwise.bxor(last_code, char) end)
+        t =
+          hash
+          |> String.to_charlist()
+          |> Enum.reduce(31, fn char, last_code -> Bitwise.bxor(last_code, char) end)
 
         "https://t#{rem(t, 8)}.rbxcdn.com/#{hash}"
       end
     end
     ```
-=== "64 bit NASM Assembly"
+=== "amd64 Linux NASM Assembly"
+    Commands to run, tested on an amd64 Arch Linux installation:
+    ``` { .bash .copy }
+    nasm -felf64 cdn_hash.asm -o cdn_hash.o
+    gcc -m64 -o cdn_hash cdn_hash.o
+    ./cdn_hash
+    ```
+
     ```nasm
-    ; nasm -felf64 cdn_hash.asm -o cdn_hash.o
-    ; gcc -m64 -o cdn_hash cdn_hash.o -no-pie
-    ; ./cdn_hash
     extern printf, snprintf
 
     section .text
@@ -135,18 +139,16 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         jmp .is_at_end
 
     .xor_t:
-        push rax
-        ; rax is 8 bytes, get the first byte by AND'ing it by 255
-        mov rax, [rax]
-        and rax, 0xFF
-        xor rdi, rax
-        pop rax
+        ; zero-extend the character (1 byte) so the other 7 bytes of rdx do not contain garbage data, from my testing it works
+        ; even with the garbage but it's better to be safe
+        movzx rdx, byte [rax]
+        xor rdi, rdx
 
         ; increment hash pointer
         inc rax
 
     .is_at_end:
-        cmp byte[rax], 0
+        cmp byte [rax], 0
         jne .xor_t
 
     .fmt_cdn_url:
@@ -158,17 +160,17 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         ; t
         mov rcx, rdx
         ; buffer
-        lea rdi, [cdn_url]
+        lea rdi, [rel cdn_url]
         ; buffer size
         mov rsi, 55
         ; format
-        lea rdx, [url_fmt]
+        lea rdx, [rel url_fmt]
         ; hash
         pop rax
         mov r8, rax
         push rax
         xor rax, rax
-        call snprintf
+        call [rel snprintf wrt ..got]
 
         pop rax
         pop r8
@@ -180,16 +182,16 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         ret
 
     main:
-        lea rax, [hash]
+        lea rax, [rel hash]
         call get_cdn_url
 
-        lea rdi, [s_fmt]
-        lea rsi, [cdn_url]
+        lea rdi, [rel s_fmt]
+        lea rsi, [rel cdn_url]
         xor rax, rax
-        call printf
+        call [rel printf wrt ..got] 
 
         mov rax, 60
-        mov rdi, 0
+        xor rdi, rdi
         syscall
 
     section .data
@@ -197,12 +199,11 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         s_fmt: db "%s", 10, 0
         url_fmt: db "https://t%d.rbxcdn.com/%s", 0
         hash: db "bbdb80c2b573bf222da3e92f5f148330", 0
-
     ```
 === "JavaScript"
     ```js
     const getCdnUrl = (hash) => {
-        const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31)
+        const t = [...hash].reduce((lastCode, char) => lastCode ^ char.charCodeAt(0), 31);
     
         return `https://t${t % 8}.rbxcdn.com/${hash}`;
     }
@@ -248,8 +249,7 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
     ```c
     void getCdnUrl(char *hash, char *buffer) {
         int i = 31;
-        int hashLength = strlen(hash);
-        for (int j = 0; j < hashLength; j++) {
+        for (int j = 0; j < strlen(hash); j++) {
             i ^= (int)hash[j];
         }
     
@@ -302,12 +302,9 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
 === "Kotlin"
     ```kotlin
     fun getCdnUrl(hash: String): String {
-        var i = 31
-        hash.forEach({ character: Char ->
-            i = i xor character.toInt()
-        });
-        
-        return "https://t${i % 8}.rbxcdn.com/${hash}"
+        val t = hash.toByteArray().fold(31) {acc, code -> acc xor code.toInt()}
+
+        return "https://t${t % 8}.rbxcdn.com/${hash}"
     }
     ```
 === "Crystal"
@@ -321,9 +318,9 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
 === "F#"
     ```fsharp
     let getCdnUrl (hash: string) =
-    let t = hash |> Seq.fold (fun lastCode char -> lastCode ^^^ (int)char) 31
-    
-    $"https://t{t % 8}.rbxcdn.com/{hash}"
+        let t = hash |> Seq.fold (fun lastCode char -> lastCode ^^^ (int)char) 31
+
+        $"https://t{t % 8}.rbxcdn.com/{hash}"
     ```
 === "PowerShell"
     ```powershell

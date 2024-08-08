@@ -14,4 +14,4 @@ There are two main ways you’ll want to access the Roblox API: sending the requ
 wrappers available for your programming language of choice. 
 
 This tutorial covers sending requests yourself. Before you attempt this, it is encouraged that you take a look at
-the [List of libraries](/list-of-libraries.md) and see if any libraries cover your use case.
+the [List of libraries](../list-of-libraries.md) and see if any libraries cover your use case.

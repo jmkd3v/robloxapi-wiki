@@ -14,10 +14,10 @@ Each service has a separate subdomain on `roblox.com`, like `users.roblox.com` o
 The documentation for that service is available via the `/docs` route, like https://users.roblox.com/docs. 
 Not all services have available documentation, and not all endpoints on those services are visible.
 
-To find the service you need, see [List of services](/list-of-services.md).
+To find the service you need, see [List of services](../list-of-services.md). <!-- TODO: create this article -->
 
 ## Endpoint documentation
-![A screenshot of documentation for GET /v1/users/{userId}](/assets/screenshots/v1_users_userid_example.png)
+![A screenshot of documentation for GET /v1/users/{userId}](../assets/screenshots/v1_users_userid_example.png)
 
 Documentation for all types of requests will always contain the following:  
 
@@ -31,7 +31,7 @@ Documentation for all types of requests will always contain the following:
 - **Response Messages** explain what different endpoint status codes mean when they are returned from this endpoint.
 - The "Try it out!" button sends a request to this endpoint with the specified parameters.
 
-![A screenshot of documentation for POST /v1/users](/assets/screenshots/v1_users_example.png)
+![A screenshot of documentation for POST /v1/users](../assets/screenshots/v1_users_example.png)
 
 Requests with a body, like POST, PUT, PATCH, and DELETE, have an additional parameter labelled `request` which contains
 the request body.

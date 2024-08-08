@@ -47,8 +47,8 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra:
   social:
@@ -64,6 +64,10 @@ nav:
   - Tutorial:
     - tutorial/index.md
     - Understanding documentation: tutorial/understanding-documentation.md
+    - Your first request: tutorial/your-first-request.md
+    - Handling errors: tutorial/handling-errors.md
+    - Authentication: tutorial/authentication.md
+    - X-CSRF-TOKEN: tutorial/x-csrf-token.md
   - List of libraries: list-of-libraries.md
   - CDN hashes: cdn-hashes.md
   - List of game templates: list-of-game-templates.md
