@@ -6,30 +6,32 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A list of Roblox asset types.">
+        <meta name="description" content="Learn how to handle API errors">
       
       
       
-        <link rel="canonical" href="https://staging.robloxapi.wiki/list-of-asset-types/">
+        <link rel="canonical" href="https://staging.robloxapi.wiki/tutorial/handling-errors/">
       
       
-        <link rel="prev" href="../list-of-game-templates/">
+        <link rel="prev" href="../your-first-request/">
       
       
+        <link rel="next" href="../authentication/">
       
-      <link rel="icon" href="../assets/logo.svg">
+      
+      <link rel="icon" href="../../assets/logo.svg">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
     
     
       
-        <title>List of asset types - RoAPI Wiki</title>
+        <title>Handling errors - RoAPI Wiki</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +50,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/theme.css">
+      <link rel="stylesheet" href="../../assets/theme.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,7 +61,7 @@
     
   <link
     rel="stylesheet"
-    href="../overrides/assets/stylesheets/main.css"
+    href="../../overrides/assets/stylesheets/main.css"
   />
 
   </head>
@@ -77,11 +79,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#list-of-asset-types" class="md-skip">
-          Skip to content
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -111,9 +108,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="RoAPI Wiki" class="md-header__button md-logo" aria-label="RoAPI Wiki" data-md-component="logo">
+    <a href="../.." title="RoAPI Wiki" class="md-header__button md-logo" aria-label="RoAPI Wiki" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -130,7 +127,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              List of asset types
+              Handling errors
             
           </span>
         </div>
@@ -217,9 +214,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="RoAPI Wiki" class="md-nav__button md-logo" aria-label="RoAPI Wiki" data-md-component="logo">
+    <a href="../.." title="RoAPI Wiki" class="md-nav__button md-logo" aria-label="RoAPI Wiki" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     RoAPI Wiki
@@ -246,7 +243,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -263,17 +260,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -287,7 +286,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Tutorial
@@ -301,7 +300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -322,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/understanding-documentation/" class="md-nav__link">
+      <a href="../understanding-documentation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -343,7 +342,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/your-first-request/" class="md-nav__link">
+      <a href="../your-first-request/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -361,10 +360,17 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../tutorial/handling-errors/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -373,6 +379,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -385,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/authentication/" class="md-nav__link">
+      <a href="../authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -406,7 +413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/x-csrf-token/" class="md-nav__link">
+      <a href="../x-csrf-token/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -434,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list-of-libraries/" class="md-nav__link">
+      <a href="../../list-of-libraries/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -454,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cdn-hashes/" class="md-nav__link">
+      <a href="../../cdn-hashes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -474,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list-of-game-templates/" class="md-nav__link">
+      <a href="../../list-of-game-templates/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -491,19 +498,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../list-of-asset-types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -512,7 +510,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -534,8 +531,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -553,309 +548,43 @@
   
 
 
-<h1 id="list-of-asset-types">List of asset types<a class="headerlink" href="#list-of-asset-types" title="Permanent link">&para;</a></h1>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">ID</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">1</td>
-<td>Image</td>
-</tr>
-<tr>
-<td style="text-align: right;">2</td>
-<td>T-Shirt</td>
-</tr>
-<tr>
-<td style="text-align: right;">3</td>
-<td>Audio</td>
-</tr>
-<tr>
-<td style="text-align: right;">4</td>
-<td>Mesh</td>
-</tr>
-<tr>
-<td style="text-align: right;">5</td>
-<td>Lua</td>
-</tr>
-<tr>
-<td style="text-align: right;">6</td>
-<td>HTML</td>
-</tr>
-<tr>
-<td style="text-align: right;">7</td>
-<td>Text</td>
-</tr>
-<tr>
-<td style="text-align: right;">8</td>
-<td>Hat</td>
-</tr>
-<tr>
-<td style="text-align: right;">9</td>
-<td>Place</td>
-</tr>
-<tr>
-<td style="text-align: right;">10</td>
-<td>Model</td>
-</tr>
-<tr>
-<td style="text-align: right;">11</td>
-<td>Shirt</td>
-</tr>
-<tr>
-<td style="text-align: right;">12</td>
-<td>Pants</td>
-</tr>
-<tr>
-<td style="text-align: right;">13</td>
-<td>Decal</td>
-</tr>
-<tr>
-<td style="text-align: right;">16</td>
-<td>Avatar</td>
-</tr>
-<tr>
-<td style="text-align: right;">17</td>
-<td>Head</td>
-</tr>
-<tr>
-<td style="text-align: right;">18</td>
-<td>Face</td>
-</tr>
-<tr>
-<td style="text-align: right;">19</td>
-<td>Gear</td>
-</tr>
-<tr>
-<td style="text-align: right;">21</td>
-<td>Badge</td>
-</tr>
-<tr>
-<td style="text-align: right;">22</td>
-<td>Group Emblem</td>
-</tr>
-<tr>
-<td style="text-align: right;">24</td>
-<td>Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">25</td>
-<td>Arms</td>
-</tr>
-<tr>
-<td style="text-align: right;">26</td>
-<td>Legs</td>
-</tr>
-<tr>
-<td style="text-align: right;">27</td>
-<td>Torso</td>
-</tr>
-<tr>
-<td style="text-align: right;">28</td>
-<td>Right Arm</td>
-</tr>
-<tr>
-<td style="text-align: right;">29</td>
-<td>Left Arm</td>
-</tr>
-<tr>
-<td style="text-align: right;">30</td>
-<td>Left Leg</td>
-</tr>
-<tr>
-<td style="text-align: right;">31</td>
-<td>Right Leg</td>
-</tr>
-<tr>
-<td style="text-align: right;">32</td>
-<td>Package</td>
-</tr>
-<tr>
-<td style="text-align: right;">33</td>
-<td>YouTubeVideo</td>
-</tr>
-<tr>
-<td style="text-align: right;">34</td>
-<td>Pass</td>
-</tr>
-<tr>
-<td style="text-align: right;">35</td>
-<td>App</td>
-</tr>
-<tr>
-<td style="text-align: right;">37</td>
-<td>Code</td>
-</tr>
-<tr>
-<td style="text-align: right;">38</td>
-<td>Plugin</td>
-</tr>
-<tr>
-<td style="text-align: right;">39</td>
-<td>SolidModel</td>
-</tr>
-<tr>
-<td style="text-align: right;">40</td>
-<td>MeshPart</td>
-</tr>
-<tr>
-<td style="text-align: right;">41</td>
-<td>Hair Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">42</td>
-<td>Face Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">43</td>
-<td>Neck Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">44</td>
-<td>Shoulder Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">45</td>
-<td>Front Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">46</td>
-<td>Back Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">47</td>
-<td>Waist Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">48</td>
-<td>Climb Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">49</td>
-<td>Death Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">50</td>
-<td>Fall Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">51</td>
-<td>Idle Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">52</td>
-<td>Jump Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">53</td>
-<td>Run Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">54</td>
-<td>Swim Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">55</td>
-<td>Walk Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">56</td>
-<td>Pose Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">59</td>
-<td>LocalizationTableManifest</td>
-</tr>
-<tr>
-<td style="text-align: right;">60</td>
-<td>LocalizationTableTranslation</td>
-</tr>
-<tr>
-<td style="text-align: right;">61</td>
-<td>Emote Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">62</td>
-<td>Video</td>
-</tr>
-<tr>
-<td style="text-align: right;">63</td>
-<td>TexturePack</td>
-</tr>
-<tr>
-<td style="text-align: right;">64</td>
-<td>T-Shirt Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">65</td>
-<td>Shirt Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">66</td>
-<td>Pants Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">67</td>
-<td>Jacket Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">68</td>
-<td>Sweater Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">69</td>
-<td>Shorts Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">70</td>
-<td>Left Shoe Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">71</td>
-<td>Right Shoe Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">72</td>
-<td>Dress Skirt Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">73</td>
-<td>Font Family</td>
-</tr>
-<tr>
-<td style="text-align: right;">74</td>
-<td>Font Face</td>
-</tr>
-<tr>
-<td style="text-align: right;">75</td>
-<td>MeshHiddenSurfaceRemoval</td>
-</tr>
-<tr>
-<td style="text-align: right;">76</td>
-<td>Eyebrow Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">77</td>
-<td>Eyelash Accessory</td>
-</tr>
-<tr>
-<td style="text-align: right;">78</td>
-<td>Mood Animation</td>
-</tr>
-<tr>
-<td style="text-align: right;">79</td>
-<td>Dynamic Head</td>
-</tr>
-<tr>
-<td style="text-align: right;">80</td>
-<td>CodeSnippet</td>
-</tr>
-</tbody>
-</table>
+  <h1>Handling errors</h1>
+
+<p>Here’s an example of an error returned from the users.roblox.com/v1/users/{userId} endpoint, you can test this yourself by
+going to <a href="https://users.roblox.com/v1/users/4">https://users.roblox.com/v1/users/4</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The user id is invalid.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;userFacingMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Something went wrong&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As you can see, it’s an errors list containing objects with a code, message, and userFacingMessage.</p>
+<ul>
+<li>The <code>code</code> is an identifier used for an error on an endpoint.</li>
+<li>The <code>message</code> is information about the error intended for the developer.</li>
+<li>The <code>userFacingMessage</code> is information about the error indented for the user. It isn’t always present and often isn’t
+    as informative as the message.</li>
+</ul>
+<p>We can use this code along with the HTTP response code (in this case, 404) and the endpoint’s "Responses" section from the
+documentation to find more information.</p>
+<p><img alt="" class="center" src="../../assets/screenshots/v1_users_responses.png" /></p>
+<p>In this case, it’s just telling us what we already know from the message. There are many cases where the API just doesn't
+give us useful information, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Something went wrong with the request, see response status code.&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In this case, we don’t get much information - the best we can do is use the documentation to try to figure out what’s
+wrong here.</p>
 
 
 
@@ -925,10 +654,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>
