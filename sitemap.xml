@@ -2,57 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://staging.robloxapi.wiki/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/cdn-hashes/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/list-of-asset-types/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/list-of-game-templates/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/list-of-libraries/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/authentication/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/handling-errors/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/understanding-documentation/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/x-csrf-token/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://staging.robloxapi.wiki/tutorial/your-first-request/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-09-09</lastmod>
     </url>
 </urlset>
