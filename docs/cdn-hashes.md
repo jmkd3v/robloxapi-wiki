@@ -340,3 +340,20 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
         return "https://t$($i % 8).rbxcdn.com/$($hash)"
     }
     ```
+=== "Haskell"
+    ```hs
+    import Data.Bits (xor)
+    import Text.Printf (printf)
+
+    getCdnUrl :: String -> String
+    getCdnUrl hash = 
+        let i = foldl (flip (xor . fromEnum)) 31 hash
+        in printf "https://t%d.rbxcdn.com/%s" (i `mod` 8) hash
+    ```
+=== "Prolog"
+    ```prolog
+    get_cdn_url(Hash, Url) :-
+        string_codes(Hash, Codes),
+        foldl([Code, Acc, Result] >> (Result is Acc xor Code), Codes, 31, Checksum),
+        format(atom(Url), 'https://t~d.rbxcdn.com/~s', [Checksum mod 8, Hash]).
+    ```
