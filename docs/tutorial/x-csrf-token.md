@@ -189,8 +189,8 @@ to a header that you have to supply to all requests that change data called the 
 malicious website to send an authenticated request to the Roblox API if you have a logged-in session in your browser.
 
 To handle this token, each time we send a request, we'll save the `X-CSRF-TOKEN` - which is present in the response headers
-- to a value. Then, if the request failed with a status code of 403, and one of the errors has the code 0, we'll send the
-request again with the `X-CSRF-TOKEN` we just got the first request as a request header. 
+- to a value. Then, if the request failed with a status code of 403, we'll send the request again with the `X-CSRF-TOKEN`
+we just got the first request as a request header. 
 
 === "Python"
     ```py
@@ -399,25 +399,21 @@ Here's an example of a function that does what we need:
     import requests
 
     cookie = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN"
-
     session = requests.Session()
     session.cookies[".ROBLOSECURITY"] = cookie
-
 
     def rbx_request(method, url, **kwargs):
         request = session.request(method, url, **kwargs)
         method = method.lower()
-        if method in {"post", "put", "patch", "delete"}:
-            if "X-CSRF-TOKEN" in request.headers:
-                session.headers["X-CSRF-TOKEN"] = request.headers["X-CSRF-TOKEN"]
-                if request.status_code == 403:
-                    body = request.body()
-                    if body.get("code", -1) == 0: # Request failed, send it again
-                        request = session.request(method, url, **kwargs)
+
+        if method in {"post", "put", "patch", "delete"} and "X-CSRF-TOKEN" in request.headers:
+            session.headers["X-CSRF-TOKEN"] = request.headers["X-CSRF-TOKEN"]
+            if request.status_code == 403: # Request failed, send it again
+                request = session.request(method, url, **kwargs)
+
         return request
 
-
-    req = rbx_request("POST", "https://auth.roblox.com/")
+    req = rbx_request("POST", "https://auth.roblox.com/v2/login")
     print(req.status_code)
     ```
 === "F#"
@@ -426,11 +422,15 @@ Here's an example of a function that does what we need:
     open System.Net.Http
     open System.Text.Json
 
-    type Error = { code: int; message: string }
-
     [<Literal>]
     let COOKIE =
         "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN"
+
+    let CSRF_METHODS =
+        [ HttpMethod.Post
+        HttpMethod.Put
+        HttpMethod.Patch
+        HttpMethod.Delete ]
 
     let cookieContainer = CookieContainer()
     cookieContainer.Add(Cookie(".ROBLOSECURITY", COOKIE, Domain = ".roblox.com"))
@@ -457,26 +457,20 @@ Here's an example of a function that does what we need:
                     )
                 )
 
-            if response.StatusCode = HttpStatusCode.Forbidden then
-                let! content = response.Content.ReadAsStreamAsync()
-                let! error = JsonSerializer.DeserializeAsync<Error> content
+            if
+                List.contains method CSRF_METHODS
+                && response.Headers.Contains("x-csrf-token")
+            then
+                httpClient.DefaultRequestHeaders.Add("x-csrf-token", response.Headers.GetValues("x-csrf-token"))
 
-                if error.code = 0 then
-                    httpClient.DefaultRequestHeaders.Add(
-                        "x-csrf-token",
-                        response.Headers.GetValues "x-csrf-token"
-                        |> Seq.head
-                    )
-
-                    return! rbxRequest method url body
-                else
-                    return Error response
-            else
-                return Ok response
+            match response.StatusCode with
+            | HttpStatusCode.OK -> return Ok response
+            | HttpStatusCode.Forbidden -> return! rbxRequest method url body
+            | _ -> return Error response
         }
 
     (task {
-        let! result = rbxRequest HttpMethod.Get "https://auth.roblox.com/" None
+        let! result = rbxRequest HttpMethod.Post "https://auth.roblox.com/v2/login" None
 
         match result with
         | Ok response -> printfn "%d" (int response.StatusCode)
@@ -489,43 +483,39 @@ Here's an example of a function that does what we need:
     ```rb
     require "http"
     require "json"
-    
-    COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN"
-    METHODS = %i(post put patch delete)
-    
+
+    COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN".freeze
+    METHODS = %i[post put patch delete].freeze
+
     module APIHelper
-      @client = HTTP.cookies({
-        :".ROBLOSECURITY" => COOKIE
-      })
-    
-      def self.rbx_request(verb, url, *args)
+    @client = HTTP.cookies({
+        ".ROBLOSECURITY": COOKIE
+    })
+
+    def self.request(verb, url, *args)
         response = @client.request(verb, url, *args)
-    
-        if METHODS.include?(verb) and response.headers.include?("x-csrf-token")
-          @client = @client.headers({
+
+        if METHODS.include?(verb) && response.headers.include?("x-csrf-token")
+        @client = @client.headers({
             "x-csrf-token": response.headers["x-csrf-token"]
-          })
-    
-          if response.status == 403
-            body = JSON.parse(response.body)
-            if body["code"] == 0
-              response = rbx_request(verb, url, *args)
-            end
-          end
+        })
+
+        response = request(verb, url, *args) if response.status == 403
         end
-    
+
         response
-      end
     end
-    
-    response = APIHelper.rbx_request(:post, "https://auth.roblox.com")
+    end
+
+    response = APIHelper.request(:post, "https://auth.roblox.com/v2/login")
     puts response.status
     ```
 === "JavaScript"
     If your runtime doesn't support native fetch, like for example pre-v21 Node.js, you may need to install a package
     like [node-fetch](https://www.npmjs.com/package/node-fetch).
     ```js
-    const COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN";
+    const COOKIE =
+        "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN";
 
     let xCsrfToken = "";
 
@@ -545,16 +535,14 @@ Here's an example of a function that does what we need:
             response.headers.has("x-csrf-token")
         ) {
             xCsrfToken = response.headers.get("x-csrf-token");
-            if (response.status == 403) {
-                const responseBody = await response.json();
-                if (responseBody.code === 0)
-                    response = await rbxRequest(verb, url, body);
-            }
+            if (response.status == 403)
+                response = await rbxRequest(verb, url, body);
         }
+
         return response;
     };
 
-    const response = await rbxRequest("POST", "https://auth.roblox.com");
+    const response = await rbxRequest("POST", "https://auth.roblox.com/v2/login");
     console.log(response.status);
     ```
 === "Rust"
@@ -565,7 +553,7 @@ Here's an example of a function that does what we need:
     use lazy_static::lazy_static;
     use reqwest::{header::HeaderMap, Method};
     use reqwest::{Client, Response, StatusCode};
-    use serde_json::{from_str, Value};
+    use serde_json::Value;
     use std::sync::{Arc, Mutex};
 
     const COOKIE: &str = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN";
@@ -582,11 +570,11 @@ Here's an example of a function that does what we need:
         }));
     }
 
-    async fn request(verb: Method, url: String, body: Option<Value>) -> Result<Response, ()> {
+    async fn request(verb: Method, url: String, body: Option<Value>) -> Response {
         let arc_ref = HEADERS.clone(); // get reference to the arc here so it lives as long as headers
         let mut headers = arc_ref.lock().unwrap();
 
-        let response = HTTP_CLIENT
+        let mut response = HTTP_CLIENT
             .request(verb.clone(), url.clone())
             .headers(headers.clone())
             .json(&body)
@@ -594,38 +582,29 @@ Here's an example of a function that does what we need:
             .await
             .unwrap();
 
-        // this is kinda botched because on the branch where .text() is called and the code is not 0, there's no response to
-        // return because it's consumed, you can upgrade it to return the errors instead of unit, see for example
-        // https://github.com/zmadie/oxid_roblox/blob/5fbe3553871c048158d54269e3e0d57dbc78ab97/src/util/api_helper.rs#L54-L67
         if let Some(x_csrf_token) = response.headers().get("x-csrf-token").cloned() {
             headers.insert("x-csrf-token", x_csrf_token);
             if response.status() == StatusCode::FORBIDDEN {
-                let body: Value = from_str(&response.text().await.unwrap()).unwrap();
-                if body["code"].as_i64().unwrap() == 0 {
-                    return Ok(HTTP_CLIENT
-                        .request(verb, url)
-                        .headers(headers.clone())
-                        .json(&body)
-                        .send()
-                        .await
-                        .unwrap());
-                } else {
-                    return Err(());
-                }
+                response = HTTP_CLIENT
+                    .request(verb, url)
+                    .headers(headers.clone())
+                    .json(&body)
+                    .send()
+                    .await
+                    .unwrap();
             }
         }
-        Ok(response)
+        response
     }
 
     #[tokio::main]
     async fn main() {
         let response = request(
-            Method::GET,
-            "https://users.roblox.com/v1/users/1".to_string(),
+            Method::POST,
+            "https://auth.roblox.com/v2/login".to_string(),
             None,
         )
-        .await
-        .unwrap();
+        .await;
 
         println!("{}", response.status());
     }
@@ -657,22 +636,20 @@ Here's an example of a function that does what we need:
                         "application/json"
                     )
             }
-
         );
-        if (response.StatusCode == HttpStatusCode.Forbidden)
+
+        if (response.Headers.Contains("x-csrf-token"))
         {
-            dynamic error = await JsonSerializer.DeserializeAsync<dynamic>(await response.Content.ReadAsStreamAsync());
-            if (error.GetProperty("code").GetInt32() == 0)
-            {
-                httpClient.DefaultRequestHeaders.Add("x-csrf-token", response.Headers.GetValues("x-csrf-token").First());
+            httpClient.DefaultRequestHeaders.Add("x-csrf-token", response.Headers.GetValues("x-csrf-token").First());
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
                 return await Request(method, url, body);
-            }
         }
 
         return response;
     }
 
-    var response = await Request(HttpMethod.Post, "https://auth.roblox.com");
+    var response = await Request(HttpMethod.Post, "https://auth.roblox.com/v2/login");
     Console.WriteLine(response.StatusCode);
     ```
 === "Elixir"
@@ -685,51 +662,45 @@ Here's an example of a function that does what we need:
     
       @roblosecurity "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN"
     
-      def start_link do
+      # Can do something like read the cookie from config.exs or a .env file in your supervisor, then pass it to this module
+      # through the children list in https://hexdocs.pm/elixir/Supervisor.html#init/2
+      def start_link(_initial_value) do
         Agent.start_link(fn -> %{Cookie: ".ROBLOSECURITY=#{@roblosecurity}"} end, name: __MODULE__)
       end
     
       defp request(verb, url, body \\ %{}) do
         headers = Agent.get(__MODULE__, & &1)
-    
+      
         with {:ok, encoded_body} <- Poison.encode(body),
-             {:ok, %HTTPoison.Response{status_code: 403} = response} <-
-               HTTPoison.request(verb, url, encoded_body, headers),
-             {:ok, body} <-
-               Poison.decode(response.body) do
+            {:ok, response} <-
+              HTTPoison.request(verb, url, encoded_body, headers) do
           xcsrf_token =
             Enum.find_value(response.headers, fn {name, value} ->
               if name == "x-csrf-token", do: value
             end)
-    
+          
           if xcsrf_token == nil do
             {:ok, response}
           else
             headers = Map.put(headers, :"x-csrf-token", xcsrf_token)
             Agent.update(__MODULE__, fn _ -> headers end)
-    
-            if body["code"] == 0 do
+          
+            if response.status_code == 403 do
               request(verb, url, body)
             else
               {:ok, response}
             end
           end
-        else
-          {:ok, response} ->
-            {:ok, response}
-    
-          {:error, error} ->
-            {:error, error}
         end
       end
     
       def main do
-        start_link()
-    
-        case request(:post, "https://auth.roblox.com") do
+        start_link(nil)
+      
+        case request(:post, "https://auth.roblox.com/v2/login") do
           {:ok, %HTTPoison.Response{status_code: status_code}} ->
             IO.puts(status_code)
-    
+          
           {:error, error} ->
             IO.inspect(error)
         end
