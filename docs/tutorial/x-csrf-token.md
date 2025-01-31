@@ -17,7 +17,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
     session = requests.Session()
     session.cookies[".ROBLOSECURITY"] = cookie
     req = session.post(
-        url="https://auth.roblox.com/v2/login"
+        url="https://auth.roblox.com//"
     )
     error = req.json()
 
@@ -35,7 +35,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
 
     response = HTTP.cookies({
       ".ROBLOSECURITY": COOKIE
-    }).post("https://auth.roblox.com")
+    }).post("https://auth.roblox.com//")
     error = JSON.parse(response)
 
     puts response.status
@@ -48,7 +48,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
     ```js
     const COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN";
 
-    const response = await fetch("https://auth.roblox.com", {
+    const response = await fetch("https://auth.roblox.com//", {
         headers: {
             Cookie: `.ROBLOSECURITY=${COOKIE};`,
             "Content-Length": "0",
@@ -81,7 +81,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
         );
 
         let response = client
-            .post("https://auth.roblox.com")
+            .post("https://auth.roblox.com//")
             .headers(headers)
             .send()
             .await
@@ -115,7 +115,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
         use httpClient =
             new HttpClient(new HttpClientHandler(UseCookies = true, CookieContainer = cookieContainer))
 
-        let! response = httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "https://auth.roblox.com/"))
+        let! response = httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "https://auth.roblox.com//"))
         let! content = response.Content.ReadAsStreamAsync()
         let! error = JsonSerializer.DeserializeAsync<Error>(content)
 
@@ -138,7 +138,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
 
     var client = new HttpClient(new HttpClientHandler() { UseCookies = true, CookieContainer = cookieContainer });
 
-    var response = await client.PostAsync("https://auth.roblox.com/", null);
+    var response = await client.PostAsync("https://auth.roblox.com//", null);
     dynamic body = JsonSerializer.Deserialize<dynamic>(
         await response.Content.ReadAsStringAsync()
     );
@@ -158,7 +158,7 @@ Here's an example of some code that won't work due to the `X-CSRF-TOKEN`:
       def main do
         headers = %{Cookie: ".ROBLOSECURITY=#{@roblosecurity};"}
 
-        with {:ok, response} <- HTTPoison.post("https://auth.roblox.com", "", headers),
+        with {:ok, response} <- HTTPoison.post("https://auth.roblox.com//", "", headers),
              {:ok, body} <- Poison.decode(response.body) do
           IO.puts(response.status_code)
           IO.puts("Error code: #{body["code"]}")
@@ -204,7 +204,7 @@ we just got the first request as a request header.
 
     # send first request
     req = session.post(
-        url="https://auth.roblox.com/"
+        url="https://auth.roblox.com//"
     )
 
     if "X-CSRF-Token" in req.headers:  # check if token is in response headers
@@ -212,7 +212,7 @@ we just got the first request as a request header.
 
     # send second request
     req2 = session.post(
-        url="https://auth.roblox.com/"
+        url="https://auth.roblox.com//"
     )
 
     print("First:", req.status_code)
@@ -230,13 +230,13 @@ we just got the first request as a request header.
         ".ROBLOSECURITY": COOKIE
     })
 
-    first_response = client.post("https://auth.roblox.com")
+    first_response = client.post("https://auth.roblox.com//")
 
     client = client.headers({
         "x-csrf-token": first_response.headers["x-csrf-token"]
     })
 
-    second_response = client.post("https://auth.roblox.com")
+    second_response = client.post("https://auth.roblox.com//")
 
     puts "First: #{first_response.status}"
     puts "Second: #{second_response.status}"
@@ -247,7 +247,7 @@ we just got the first request as a request header.
     ```js
     const COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_TOKEN";
 
-    const firstResponse = await fetch("https://auth.roblox.com", {
+    const firstResponse = await fetch("https://auth.roblox.com//", {
         headers: {
             Cookie: `.ROBLOSECURITY=${COOKIE};`,
             "Content-Length": "0",
@@ -255,7 +255,7 @@ we just got the first request as a request header.
         method: "POST",
     });
 
-    const secondResponse = await fetch("https://auth.roblox.com", {
+    const secondResponse = await fetch("https://auth.roblox.com//", {
         headers: {
             Cookie: `.ROBLOSECURITY=${COOKIE};`,
             "x-csrf-token": firstResponse.headers.get("x-csrf-token"),
@@ -285,7 +285,7 @@ we just got the first request as a request header.
         );
 
         let first_response = client
-            .post("https://auth.roblox.com")
+            .post("https://auth.roblox.com//")
             .headers(headers)
             .send()
             .await
@@ -309,7 +309,7 @@ we just got the first request as a request header.
         );
 
         let second_response = client
-            .post("https://auth.roblox.com")
+            .post("https://auth.roblox.com//")
             .headers(headers)
             .send()
             .await
@@ -333,10 +333,10 @@ we just got the first request as a request header.
 
     var httpClient = new HttpClient(new HttpClientHandler() { UseCookies = true, CookieContainer = cookieContainer });
 
-    var firstResponse = await httpClient.PostAsync("https://auth.roblox.com/", null);
+    var firstResponse = await httpClient.PostAsync("https://auth.roblox.com//", null);
     httpClient.DefaultRequestHeaders.Add("x-csrf-token", firstResponse.Headers.GetValues("x-csrf-token").First());
 
-    var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://auth.roblox.com/");
+    var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://auth.roblox.com//");
     requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     var secondResponse = await httpClient.SendAsync(requestMessage);
 
@@ -354,10 +354,10 @@ we just got the first request as a request header.
       def main do
         headers = %{Cookie: ".ROBLOSECURITY=#{@roblosecurity};"}
     
-        with {:ok, first_response} <- HTTPoison.post("https://auth.roblox.com", "", headers),
+        with {:ok, first_response} <- HTTPoison.post("https://auth.roblox.com//", "", headers),
              {:ok, second_response} <-
                HTTPoison.post(
-                 "https://auth.roblox.com",
+                 "https://auth.roblox.com//",
                  "",
                  Map.put(
                    headers,
@@ -413,7 +413,7 @@ Here's an example of a function that does what we need:
 
         return request
 
-    req = rbx_request("POST", "https://auth.roblox.com/v2/login")
+    req = rbx_request("POST", "https://auth.roblox.com//")
     print(req.status_code)
     ```
 === "F#"
@@ -470,7 +470,7 @@ Here's an example of a function that does what we need:
         }
 
     (task {
-        let! result = rbxRequest HttpMethod.Post "https://auth.roblox.com/v2/login" None
+        let! result = rbxRequest HttpMethod.Post "https://auth.roblox.com//" None
 
         match result with
         | Ok response -> printfn "%d" (int response.StatusCode)
@@ -488,26 +488,26 @@ Here's an example of a function that does what we need:
     METHODS = %i[post put patch delete].freeze
 
     module APIHelper
-    @client = HTTP.cookies({
-        ".ROBLOSECURITY": COOKIE
-    })
+      @client = HTTP.cookies({
+          ".ROBLOSECURITY": COOKIE
+      })
 
-    def self.request(verb, url, *args)
-        response = @client.request(verb, url, *args)
+      def self.request(verb, url, *args)
+          response = @client.request(verb, url, *args)
 
-        if METHODS.include?(verb) && response.headers.include?("x-csrf-token")
-        @client = @client.headers({
-            "x-csrf-token": response.headers["x-csrf-token"]
-        })
+          if METHODS.include?(verb) && response.headers.include?("x-csrf-token")
+          @client = @client.headers({
+              "x-csrf-token": response.headers["x-csrf-token"]
+          })
 
-        response = request(verb, url, *args) if response.status == 403
-        end
+          response = request(verb, url, *args) if response.status == 403
+          end
 
-        response
+          response
+      end
     end
-    end
 
-    response = APIHelper.request(:post, "https://auth.roblox.com/v2/login")
+    response = APIHelper.request(:post, "https://auth.roblox.com//")
     puts response.status
     ```
 === "JavaScript"
@@ -542,7 +542,7 @@ Here's an example of a function that does what we need:
         return response;
     };
 
-    const response = await rbxRequest("POST", "https://auth.roblox.com/v2/login");
+    const response = await rbxRequest("POST", "https://auth.roblox.com//");
     console.log(response.status);
     ```
 === "Rust"
@@ -601,7 +601,7 @@ Here's an example of a function that does what we need:
     async fn main() {
         let response = request(
             Method::POST,
-            "https://auth.roblox.com/v2/login".to_string(),
+            "https://auth.roblox.com//".to_string(),
             None,
         )
         .await;
@@ -649,7 +649,7 @@ Here's an example of a function that does what we need:
         return response;
     }
 
-    var response = await Request(HttpMethod.Post, "https://auth.roblox.com/v2/login");
+    var response = await Request(HttpMethod.Post, "https://auth.roblox.com//");
     Console.WriteLine(response.StatusCode);
     ```
 === "Elixir"
@@ -697,7 +697,7 @@ Here's an example of a function that does what we need:
       def main do
         start_link(nil)
       
-        case request(:post, "https://auth.roblox.com/v2/login") do
+        case request(:post, "https://auth.roblox.com//") do
           {:ok, %HTTPoison.Response{status_code: status_code}} ->
             IO.puts(status_code)
           
