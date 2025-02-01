@@ -17,7 +17,7 @@ reach the one containing the object. This works, but it's quite wasteful as you 
 https://<select id="hash-calculator-select">
 <option value="t">t</option>
 <option value="c">c</option>
-</select><span id="hash-calculator-num">X</span>.rbxcdn.com/<input type="text" autocorrect="off" id="hash-calculator-input" maxlength="32" placeholder="00000000000000000000000000000000">
+</select><span id="hash-calculator-num">X</span>.rbxcdn.com/<input type="text" autocorrect="off" id="hash-calculator-input" maxlength="38" placeholder="00000000000000000000000000000000">
 </span>
 </div>
 
@@ -47,7 +47,7 @@ hashInput.addEventListener("input", update);
 
 A common implementation is as follows:  
 Create a function that takes in a string `hash`. In this function, define `x` to `31`.
-Next, we loop through the first 32 characters in `hash`, and in each iteration set the `x` variable to itself bitwise 
+Next, we loop through the first 38 characters in `hash`, and in each iteration set the `x` variable to itself bitwise 
 XORed against the integer representation of that character (`x ^= chr`). Then we return `x`.
 
 We can then use the `x` variable to compose the final URL with the pattern `https://t{x}.rbxcdn.com/{hash}`.
@@ -65,7 +65,7 @@ func("b717c50234c3d91b0be7dbfc9c588ed4") -> 0
     ```py
     def get_cdn_url(hash):
         i = 31
-        for char in hash[:32]:
+        for char in hash[:38]:
             i ^= ord(char)  # i ^= int(char, 16) also works
         return f"https://t{i%8}.rbxcdn.com/{hash}"
 
